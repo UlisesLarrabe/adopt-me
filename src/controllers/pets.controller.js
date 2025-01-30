@@ -1,20 +1,6 @@
 import PetDTO from "../dto/Pet.dto.js";
 import { petsService } from "../services/index.js"
 import __dirname from "../utils/index.js";
-import { faker } from "@faker-js/faker";
-
-const createMockPets = async(req, res) => {
-    let quantity = 50
-    for (let i = 0; i < quantity; i++){
-        const pet = PetDTO.getPetInputFrom({
-            name: faker.animal.dog(),
-            specie: faker.animal.type(),
-            birthDate: faker.date.past()
-        });
-        await petsService.create(pet);
-    }
-    res.send({status:"success",message:"pets created"})
-}  
 
 const getAllPets = async(req,res)=>{
     const pets = await petsService.getAll();
@@ -53,7 +39,6 @@ const createPetWithImage = async(req,res) =>{
         birthDate,
         image:`${__dirname}/../public/img/${file.filename}`
     });
-    console.log(pet);
     const result = await petsService.create(pet);
     res.send({status:"success",payload:result})
 }
@@ -63,5 +48,4 @@ export default {
     updatePet,
     deletePet,
     createPetWithImage,
-    createMockPets
 }

@@ -1,5 +1,7 @@
 import { usersService } from "../services/index.js"
 
+
+
 const getAllUsers = async(req,res)=>{
     const users = await usersService.getAll();
     res.send({status:"success",payload:users})
@@ -31,5 +33,5 @@ export default {
     deleteUser,
     getAllUsers,
     getUser,
-    updateUser
+    updateUser,
 }
